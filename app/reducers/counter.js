@@ -1,20 +1,26 @@
 // @flow
-import { INCREMENT_COUNTER, DECREMENT_COUNTER } from '../actions/counter';
+import { ADD_ZIP } from '../actions/counter';
+
 
 export type counterStateType = {
-  counter: number
+  counter: any
 };
 
 type actionType = {
   type: string
 };
 
-export default function counter(state: number = 0, action: actionType) {
+export default function counter(state: array = [], action: actionType) {
   switch (action.type) {
-    case INCREMENT_COUNTER:
-      return state + 1;
-    case DECREMENT_COUNTER:
-      return state - 1;
+    case ADD_ZIP:
+        if(action.fileNames === undefined){
+          console.log("No file selected");
+          return state;
+        } else {
+          action.fileNames.forEach(file => !state.includes(file) && state.push(file));
+          console.log("state", state);
+        }
+      return state;
     default:
       return state;
   }

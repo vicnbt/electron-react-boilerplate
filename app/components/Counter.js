@@ -1,38 +1,49 @@
 // @flow
-import React, { Component } from 'react';
-import { Link } from 'react-router';
+import React, {Component} from 'react';
+import {Link} from 'react-router';
 import styles from './Counter.css';
+import AdmZip from 'adm-zip';
+import _ from 'lodash';
 
 class Counter extends Component {
   props: {
-    increment: () => void,
-    incrementIfOdd: () => void,
-    incrementAsync: () => void,
-    decrement: () => void,
-    counter: number
+    selectFile: () => void,
+    counter: any
   };
 
+  componentDidMount() {
+    var zip = new AdmZip("./1.zip");
+    var zipEntries = zip.getEntries(); // an array of ZipEntry records
+
+    zipEntries.forEach(function (zipEntry) {
+      console.log(zipEntry.toString()); // outputs zip entries information
+      if (zipEntry.entryName == "my_file.txt") {
+        console.log(zipEntry.data.toString('utf8'));
+      }
+    });
+  }
+
   render() {
-    const { increment, incrementIfOdd, incrementAsync, decrement, counter } = this.props;
+    const {selectFile, counter} = this.props;
+    console.log(counter);
     return (
       <div>
         <div className={styles.backButton} data-tid="backButton">
           <Link to="/">
-            <i className="fa fa-arrow-left fa-3x" />
+            <i className="fa fa-arrow-left fa-3x"/>
           </Link>
         </div>
         <div className={`counter ${styles.counter}`} data-tid="counter">
-          {counter}
-        </div>
+          <ul>
+            {_.map(counter, zip =>
+            <li>{zip}</li>
+            )}
+          </ul>
+      </div>
         <div className={styles.btnGroup}>
-          <button className={styles.btn} onClick={increment} data-tclass="btn">
-            <i className="fa fa-plus" />
+          <button className={styles.btn} onClick={selectFile} data-tclass="btn">
+            Add
           </button>
-          <button className={styles.btn} onClick={decrement} data-tclass="btn">
-            <i className="fa fa-minus" />
-          </button>
-          <button className={styles.btn} onClick={incrementIfOdd} data-tclass="btn">odd</button>
-          <button className={styles.btn} onClick={() => incrementAsync()} data-tclass="btn">async</button>
         </div>
       </div>
     );

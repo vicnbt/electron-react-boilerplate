@@ -4,9 +4,9 @@
 
 .counter {
   position: absolute;
-  top: 30%;
-  left: 45%;
-  font-size: 10rem;
+  top: 60px;
+  left: 60px;
+  font-size: 14px;
   font-weight: bold;
   letter-spacing: -0.025em;
 }

@@ -1,37 +1,25 @@
 // @flow
 import type { counterStateType } from '../reducers/counter';
+import { remote } from 'electron';
+const { dialog } = remote;
+import fs from 'fs';
 
-export const INCREMENT_COUNTER = 'INCREMENT_COUNTER';
-export const DECREMENT_COUNTER = 'DECREMENT_COUNTER';
+export const ADD_ZIP = 'ADD_ZIP';
+export const SELECT_FILE = 'SELECT_FILE';
 
-export function increment() {
+export function addZipFile(fileNames) {
   return {
-    type: INCREMENT_COUNTER
+    type: ADD_ZIP,
+    fileNames
   };
 }
 
-export function decrement() {
-  return {
-    type: DECREMENT_COUNTER
-  };
-}
-
-export function incrementIfOdd() {
-  return (dispatch: () => void, getState: () => counterStateType) => {
-    const { counter } = getState();
-
-    if (counter % 2 === 0) {
-      return;
-    }
-
-    dispatch(increment());
-  };
-}
-
-export function incrementAsync(delay: number = 1000) {
+export function selectFile() {
   return (dispatch: () => void) => {
-    setTimeout(() => {
-      dispatch(increment());
-    }, delay);
+    dialog.showOpenDialog((fileNames) => {
+      // fileNames is an array that contains all the selected
+      console.log("fileNames", fileNames);
+      dispatch(addZipFile(fileNames));
+    });
   };
 }
