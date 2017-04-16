@@ -34,11 +34,7 @@ class Counter extends Component {
           </Link>
         </div>
         <div className={`counter ${styles.counter}`} data-tid="counter">
-          <ul>
-            {_.map(counter, zip =>
-            <li>{zip}</li>
-            )}
-          </ul>
+            {counter}
       </div>
         <div className={styles.btnGroup}>
           <button className={styles.btn} onClick={selectFile} data-tclass="btn">

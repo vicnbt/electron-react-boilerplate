@@ -10,7 +10,7 @@ export const SELECT_FILE = 'SELECT_FILE';
 export function addZipFile(fileNames) {
   return {
     type: ADD_ZIP,
-    fileNames
+    fileNames: JSON.stringify(fileNames)
   };
 }
 
