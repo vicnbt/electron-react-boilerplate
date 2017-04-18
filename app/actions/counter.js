@@ -6,11 +6,12 @@ import fs from 'fs';
 
 export const ADD_ZIP = 'ADD_ZIP';
 export const SELECT_FILE = 'SELECT_FILE';
+export const PROCESS_FILES = 'PROCESS_FILES';
 
 export function addZipFile(fileNames) {
   return {
     type: ADD_ZIP,
-    fileNames: JSON.stringify(fileNames)
+    fileNames: fileNames
   };
 }
 
@@ -21,5 +22,11 @@ export function selectFile() {
       console.log("fileNames", fileNames);
       dispatch(addZipFile(fileNames));
     });
+  };
+}
+
+export function processFiles() {
+  return {
+    type: PROCESS_FILES
   };
 }
