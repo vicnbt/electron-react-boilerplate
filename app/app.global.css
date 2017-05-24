@@ -37,3 +37,12 @@ a:hover {
   text-decoration: none;
   cursor: pointer;
 }
+
+.counter {
+  top: 148px;
+  height: 100%;
+  max-height: 830px;
+  max-width: 600px;
+  overflow-y: scroll;
+  width: 100%;
+}

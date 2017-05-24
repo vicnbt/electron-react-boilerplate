@@ -1,12 +1,11 @@
 // @flow
-import type { counterStateType } from '../reducers/counter';
 import { remote } from 'electron';
 const { dialog } = remote;
-import fs from 'fs';
 
 export const ADD_ZIP = 'ADD_ZIP';
 export const SELECT_FILE = 'SELECT_FILE';
 export const PROCESS_FILES = 'PROCESS_FILES';
+export const CLEAR = 'CLEAR';
 
 export function addZipFile(fileNames) {
   return {
@@ -28,5 +27,11 @@ export function selectFile() {
 export function processFiles() {
   return {
     type: PROCESS_FILES
+  };
+}
+
+export function clear() {
+  return {
+    type: CLEAR
   };
 }
